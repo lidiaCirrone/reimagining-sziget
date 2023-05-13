@@ -31,5 +31,8 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-twig": "^1.2.0",
     "gulp-watch": "^5.0.1"
+  },
+  "devDependencies": {
+    "sass": "^1.62.1"
   }
 }

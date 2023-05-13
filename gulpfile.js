@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     data = require('gulp-data'),
     twig = require('gulp-twig'),
     prefix = require('gulp-autoprefixer'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-sass')(require('sass')),
     plumber = require('gulp-plumber'),
     concat = require('gulp-concat'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -118,7 +118,7 @@ gulp.task('js', function(){
       })      
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest(paths.public + 'assets/js'));
-});
+   });
 
 /**
  * Watch scss files for changes & recompile
