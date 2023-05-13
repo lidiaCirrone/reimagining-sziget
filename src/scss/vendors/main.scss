@@ -1,0 +1,13 @@
+// ****** Our base variables ******* //
+
+$font-family-base : 'Raleway', sans-serif;
+$font-family-head-base : 'Nothing You Could Do', cursive; // Custom
+$font-family-lead-base : 'Montserrat', sans-serif; // Custom
+
+// Font Weight Base
+$font-weight-light:           100 !default;
+$font-weight-normal:          500 !default;
+$font-weight-bold:            700 !default;
+
+// @import "_variables"; // --- Vendors Variables
+// @import "bootstrap/bootstrap"; // --- Vendors Bootstrap 4

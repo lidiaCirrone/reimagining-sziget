@@ -1,0 +1,35 @@
+{
+  "name": "reimagining-sziget",
+  "version": "1.0.0",
+  "description": "a small project meant to redesign part of the Sziget festival ticket purchase flow with a focus on accessibility",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lidiaCirrone/reimagining-sziget.git"
+  },
+  "keywords": [
+    "frontend",
+    "HTML",
+    "SCSS",
+    "twig",
+    "gulp"
+  ],
+  "author": "Lidia Cirrone",
+  "license": "ISC",
+  "homepage": "https://www.polyglotwannabe.com/",
+  "dependencies": {
+    "browser-sync": "^2.29.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-data": "^1.3.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-twig": "^1.2.0",
+    "gulp-watch": "^5.0.1"
+  }
+}

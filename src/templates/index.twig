@@ -1,0 +1,13 @@
+{% extends "layouts/default.twig" %}
+{% block content %}
+	<!-- =============== Block Main Top =============== -->
+	{% include 'blocks/block-main-top.twig' %}
+	<div class="container">
+		<div class="col-lg-7 text-center mx-auto border border-warning py-4 px-5 my-5">
+			<h1 class="display-1 text-warning">Gulp, Twig and SCSS</h1>
+			<span class="text-secondary">{{description}}</span>
+		</div>
+	</div>
+	<!-- =============== Block Main Bottom =============== -->
+	{% include 'blocks/block-main-bottom.twig' %}
+{% endblock %}
