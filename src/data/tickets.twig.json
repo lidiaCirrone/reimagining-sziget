@@ -1,0 +1,109 @@
+{
+   "title": "Reimagining Sziget Tickets Page",
+   "ticketTypes": [
+      {
+         "label": "Multi-Day Passes",
+         "tickets": [
+            {
+               "label": "Full Festival Pass",
+               "price": 365,
+               "validity": 6
+            },
+            {
+               "label": "Full Festival VIP Pass",
+               "price": 585,
+               "validity": 6
+            },
+            {
+               "label": "3-Day Pass",
+               "price": 260,
+               "validity": 3
+            },
+            {
+               "label": "3-Day VIP Pass",
+               "price": 425,
+               "validity": 3
+            }
+         ]
+      },
+      {
+         "label": "Daily tickets",
+         "tickets": [
+            {
+               "label": "Daily tickets",
+               "price": 85,
+               "validity": 1,
+               "days": [
+                  {
+                     "day": "20230810",
+                     "price": 85,
+                     "description": "Celebrate freedom with Florence + the Machine & many more"
+                  },
+                  {
+                     "day": "20230811",
+                     "price": 105,
+                     "description": "Celebrate freedom with Imagine Dragons & many more"
+                  },
+                  {
+                     "day": "20230812",
+                     "price": 95,
+                     "description": "Celebrate freedom with David Guetta & many more"
+                  },
+                  {
+                     "day": "20230813",
+                     "price": 85,
+                     "description": "Celebrate Freedom with Mumford & Sons and many more"
+                  },
+                  {
+                     "day": "20230814",
+                     "price": 85,
+                     "description": "Celebrate Freedom with Lorde, Macklemore & many more"
+                  },
+                  {
+                     "day": "20230815",
+                     "price": 95,
+                     "description": "Celebrate freedom with Billie Eilish & many more"
+                  }
+               ]
+            },
+            {
+               "label": "VIP Daily tickets",
+               "price": 170,
+               "validity": 1,
+               "days": [
+                  {
+                     "day": "20230810",
+                     "price": 170,
+                     "description": "Florence + the Machine on a higher level"
+                  },
+                  {
+                     "day": "20230811",
+                     "price": 190,
+                     "description": "Imagine Dragons on a higher level"
+                  },
+                  {
+                     "day": "20230812",
+                     "price": 180,
+                     "description": "David Guetta on a higher level"
+                  },
+                  {
+                     "day": "20230813",
+                     "price": 170,
+                     "description": "Sziget experience on a higher level"
+                  },
+                  {
+                     "day": "20230814",
+                     "price": 170,
+                     "description": "Sziget experience on a higher level"
+                  },
+                  {
+                     "day": "20230815",
+                     "price": 180,
+                     "description": "Billie Eilish on a higher level"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
