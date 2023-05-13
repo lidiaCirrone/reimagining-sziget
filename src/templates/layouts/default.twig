@@ -1,20 +1,26 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="en">
 	<head>
 		{% include "../includes/head.twig" %}
 	</head>
 	<body>
-		<!-- HEADER -->
-		{% include "../includes/header.twig" %}
+		{% block beforePage %}{% endblock %}
+		<div id="page">
+			<div>
+				<!-- HEADER -->
+				{% include "../includes/header.twig" %}
 
-		<!-- MAIN -->
-		<main>
-			{% block content %}{% endblock %}
-		</main>
+				<!-- MAIN -->
+				<main>
+					{% block content %}{% endblock %}
+				</main>
+			</div>
 
-		<!-- FOOTER -->
-		{% include "../includes/footer.twig" %}
+			<!-- FOOTER -->
+			{% include "../includes/footer.twig" %}
 
-		<!-- SCRIPTS -->
-		{% include "../includes/scripts.twig" %}</body>
+			<!-- SCRIPTS -->
+			{% include "../includes/scripts.twig" %}
+		</div>
+	</body>
 </html>
