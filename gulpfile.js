@@ -1,149 +1,152 @@
-/*global require*/
-"use strict";
+const { src, dest, parallel, series, watch } = require('gulp');
+// const pug = require('gulp-pug'); // Pug default view template
+const twig = require('gulp-twig');
+const sass = require('gulp-sass')(require('sass'));
+const prefix = require('gulp-autoprefixer');
+const data = require('gulp-data');
+//const minifyCSS = require('gulp-csso');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const plumber = require('gulp-plumber');
+const browsersync = require('browser-sync');
+const gulpcopy = require('gulp-copy');
+const fs = require('fs');
+const del = require('del');
+const path = require('path');
 
-var gulp = require('gulp'),
-    path = require('path'),
-    data = require('gulp-data'),
-    twig = require('gulp-twig'),
-    prefix = require('gulp-autoprefixer'),
-    sass = require('gulp-sass')(require('sass')),
-    plumber = require('gulp-plumber'),
-    concat = require('gulp-concat'),
-    sourcemaps = require('gulp-sourcemaps'),
-    browserSync = require('browser-sync'),
-    fs = require('fs');
-    
 /*
  * Directories here
  */
-
 var paths = {
-   public: './public/',
-   sass: './src/scss/',
-   css: './public/assets/css/',
-   data: './src/data/'
+    build: './public/',
+    scss: './src/scss/',
+    data: './src/data/',
+    js: './src/js/'
 };
 
-/**
-* Compile .twig files and pass data from json file
-* matching file name. index.twig - index.twig.json into HTMLs
-*/
+// SCSS bundled into CSS task
+function css() {
+  return src('src/scss/vendors/*.scss')
+    .pipe(sourcemaps.init())
+    // Stay live and reload on error
+    .pipe(plumber({
+        handleError: function (err) {
+            console.log(err);
+            this.emit('end');
+        }
+    }))
+    .pipe(sass({
+        includePaths: [paths.scss + 'vendors/'],
+        outputStyle: 'compressed'
+    }).on('error', function (err) {
+        console.log(err.message);
+        // sass.logError
+        this.emit('end');
+    }))
+    .pipe(prefix(['last 15 versions','> 1%','ie 8','ie 7','iOS >= 9','Safari >= 9','Android >= 4.4','Opera >= 30'], {
+        cascade: true
+    }))
+    //.pipe(minifyCSS())
+   //  .pipe(concat('bootstrap.min.css'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest('public/assets/css'));
+}
 
-gulp.task('twig', function () {
-   return gulp.src(['./src/templates/*.twig'])
-   // Stay live and reload on error
-   .pipe(plumber({
-      handleError: function (err) {
-         console.log(err);
-         this.emit('end');
-      }
-   }))
-   .pipe(data(function (file) {
-      return JSON.parse(fs.readFileSync(paths.data +
-path.basename(file.path) + '.json'));
-   }))
-   .pipe(twig())
-   .on('error', function (err) {
-      process.stderr.write(err.message + '\n');
-      this.emit('end');
-   })
-   .pipe(gulp.dest(paths.public));
-});
+// JS bundled into min.js task
+function js() {
+    return src('src/js/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(concat('scripts.min.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest('public/assets/js'));
+}
 
 /**
- * Recompile .twig files and live reload the browser
+ * Compile .twig files and pass in data from json file
+ * matching file name. index.twig - index.twig.json
  */
-
-gulp.task('rebuild', ['twig'], function () {
-   // BrowserSync Reload
-   browserSync.reload();
-});
-
-/**
- * Wait for twig, js and sass tasks, then launch the browser-sync Server
- */
-
-gulp.task('browser-sync', ['sass', 'twig', 'js'], function () {
-browserSync({
-   server: {
-      baseDir: paths.public
-   },
-   notify: false,
-   browser:"google chrome"
-   });
-});
-
-/**
- * Compile .scss files into build css directory With autoprefixer no
- * need for vendor prefixes then live reload the browser.
- */
-
-gulp.task('sass', function () {
-return gulp.src(paths.sass + 'vendors/main.scss')      
-   .pipe(sourcemaps.init())
-   // Stay live and reload on error
-   .pipe(plumber({
-      handleError: function (err) {
-         console.log(err);
-         this.emit('end');
-      }
-   }))   
-   .pipe(
-      sass({
-          includePaths: [paths.sass + 'vendors/'],
-          outputStyle: 'expanded'
-      }).on('error', function (err) {
-          console.log(err.message);
-          this.emit('end');
-      })
-   )
-   .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {
-      cascade: true
-   }))
-   .pipe(sourcemaps.write('.'))
-   .pipe(gulp.dest(paths.css));
-});
+function twigTpl () {
+    return src(['./src/templates/**/*.twig'])
+    // Stay live and reload on error
+    .pipe(plumber({
+        handleError: function (err) {
+            console.log(err);
+            this.emit('end');
+        }
+    }))
+    // Load template pages json data
+   //  .pipe(data(function (file) {
+   //          return JSON.parse(fs.readFileSync(paths.data + path.basename(file.path) + '.json'));		
+   //      }).on('error', function (err) {
+   //          process.stderr.write(err.message + '\n');
+   //          this.emit('end');
+   //      })
+   //  )
+    // Load default json data
+    .pipe(data(function () {
+            return JSON.parse(fs.readFileSync(paths.data + path.basename('index.twig.json')));
+        }).on('error', function (err) {
+            process.stderr.write(err.message + '\n');
+            this.emit('end');
+        })
+    )
+    // Twig compiled
+    .pipe(twig()
+        .on('error', function (err) {
+            process.stderr.write(err.message + '\n');
+            this.emit('end');
+        })
+    )    
+    .pipe(dest(paths.build));
+}
 
 /**
- * Compile .js files into build js directory With app.min.js
+ * Copy assets directory
  */
+function copyAssets() {
+    // Copy assets
+    return src(['./src/assets/**/*.*','!./src/assets/**/*.psd','!./src/assets/**/*.*.map'],
+        del(paths.build + 'assets/**/*')
+    )
+    .pipe(gulpcopy(paths.build + 'assets', { prefix: 2 }));
+}
 
-gulp.task('js', function(){
-   return gulp.src(paths.public + 'assets/js/script.js')
-      .pipe(sourcemaps.init())
-      .pipe(concat('script.min.js'))
-      .on('error', function (err) {
-         console.log(err.toString());
-         this.emit('end');
-      })      
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(paths.public + 'assets/js'));
-   });
+// BrowserSync
+function browserSync() {
+    browsersync({
+        server: {
+            baseDir: paths.build
+        },
+        notify: false,
+      //   browser: "google chrome",
+        // proxy: "0.0.0.0:5000"
+    });
+}
 
-/**
- * Watch scss files for changes & recompile
- * Watch .twig files run twig-rebuild then reload BrowserSync
- */
+// BrowserSync reload 
+function browserReload () {
+    return browsersync.reload;
+}
 
-gulp.task('watch', function () {
-   gulp.watch(paths.public + 'assets/js/script.js', ['js', browserSync.reload]);
-   gulp.watch(paths.sass + 'vendors/main.scss', ['sass', browserSync.reload]);
-   gulp.watch([
-       'src/templates/**/*.twig',
-       'src/data/**/*.twig.json'
-     ], 
-     {cwd:'./'}, 
-     ['rebuild']);
-});
+// Watch files
+function watchFiles() {
+    // Watch SCSS changes    
+    watch(paths.scss + '**/*.scss', parallel(css))
+    .on('change', browserReload());
+    // Watch javascripts changes    
+    watch(paths.js + '*.js', parallel(js))
+    .on('change', browserReload());
+    // Watch template changes
+    watch(['src/templates/**/*.twig','src/data/*.twig.json'], parallel(twigTpl))
+    .on('change', browserReload());
+    // Assets Watch and copy to build in some file changes
+    watch('src/assets/**/*')
+    .on('change', series(copyAssets, css, js, browserReload()));
+}
 
-// Build task compile sass and twig.
+const watching = parallel(watchFiles, browserSync);
 
-gulp.task('build', ['sass', 'twig']);
-
-/**
- * Default task, running just `gulp` will compile the sass,
- * compile the project site, launch BrowserSync then watch
- * files for changes
- */
-
-gulp.task('default', ['browser-sync', 'watch']);
+exports.js = js;
+exports.css = css;
+exports.default = parallel(copyAssets, css, js, twigTpl);
+exports.watch = watching;
