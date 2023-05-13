@@ -1,0 +1,36 @@
+{% extends "layouts/default.twig" %}
+{% block beforePage %}
+	{% include "includes/cart.twig" %}
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<section class="ph2">
+			{% for category in ticketTypes %}
+				<h1 class="center mt3">{{category.label}}</h1>
+				{% if category.tickets|length > 0 %}
+					<ul class="tickets-list">
+						{% for ticket in category.tickets %}
+							<li>
+								<div class="validity">{{ticket.validity}}</div>
+								<div class="info">
+									<span>{{ ticket.label }}</span>
+									<span>€{{ticket.price}}</span>
+								</div>
+								<div>
+									<a href="#" class="icon add-to-cart" data-ticket={{ ticket.label|e('html_attr') }} data-price={{ ticket.price }} data-validity={{ ticket.validity }}>
+										<i class="fa-solid fa-cart-shopping"></i>
+									</a>
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endfor %}
+
+			<div class="spacer"></div>
+			<p class="center">
+				<a href="index.html">Go back to the homepage</a>
+			</p>
+		</section>
+	</div>
+{% endblock %}

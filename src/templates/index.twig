@@ -2,11 +2,19 @@
 {% block content %}
 	<!-- =============== Block Main Top =============== -->
 	{% include 'blocks/block-main-top.twig' %}
-	<div class="container">
-		<div class="col-lg-7 text-center mx-auto border border-warning py-4 px-5 my-5">
-			<h1 class="display-1 text-warning">{{title}}</h1>
-			<span class="text-secondary">{{description}}</span>
-		</div>
+	<div class="container ph1">
+		<section>
+			<h1>{{title}}</h1>
+			<span>{{description}}</span>
+			<p>Here is a small project where I try to tackle a few of the issues detected after a Lighthouse audit on the official Sziget festival website.</p>
+			<ul>
+				<li>everything scrolls when a modal is open (not only the background, but even the modal itself)</li>
+				<li>pressing the tab key doesn't go to the next link but scrolls the page, apparently randomly</li>
+				<li>while following the ticket purchase flow, one cannot open dropdown when switching field using solely the keyboard</li>
+			</ul>
+			<div class="spacer"></div>
+			<a href="tickets.html" class="block center">Go to the tickets page</a>
+		</section>
 	</div>
 	<!-- =============== Block Main Bottom =============== -->
 	{% include 'blocks/block-main-bottom.twig' %}
