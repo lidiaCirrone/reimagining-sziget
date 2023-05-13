@@ -1,13 +1,196 @@
-// ****** Our base variables ******* //
+$font-regular: "Evolventa", sans-serif;
 
-$font-family-base : 'Raleway', sans-serif;
-$font-family-head-base : 'Nothing You Could Do', cursive; // Custom
-$font-family-lead-base : 'Montserrat', sans-serif; // Custom
+$accent: #39bdff;
 
-// Font Weight Base
-$font-weight-light:           100 !default;
-$font-weight-normal:          500 !default;
-$font-weight-bold:            700 !default;
+* {
+  font-family: $font-regular;
+}
 
-// @import "_variables"; // --- Vendors Variables
-// @import "bootstrap/bootstrap"; // --- Vendors Bootstrap 4
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html > *:not(body) {
+  display: none;
+}
+
+#page {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $accent;
+  letter-spacing: 1px;
+}
+
+a {
+  transition: color linear 0.2s;
+  color: grey;
+}
+
+a:hover {
+  color: $accent;
+}
+
+.icon,
+button {
+  cursor: pointer;
+  color: black;
+}
+
+.icon:hover {
+  color: $accent;
+}
+
+.bar {
+  background-color: $accent;
+  display: flex;
+  justify-content: end;
+  padding: 1rem;
+
+  i {
+    color: white;
+  }
+}
+
+#cart-modal {
+  min-width: 50vw;
+
+  .close {
+    font-size: 1.3rem;
+  }
+
+  form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+#cart-modal[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  width: 60%;
+  align-self: center;
+  margin-top: 1rem;
+  padding: 0.4rem 0.5rem;
+  border: 0;
+  background-color: $accent;
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.button:hover {
+  background-color: black;
+}
+
+.tickets-list {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    background-color: #ededed;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    padding: 0.8rem;
+    margin: 0.4rem 0;
+  }
+
+  .validity {
+    margin-right: 1rem;
+    font-size: 2rem;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+// utils
+
+.ais {
+  align-items: start;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.block {
+  display: block;
+}
+
+.center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.jcsb {
+  justify-content: space-between;
+}
+
+.m0a {
+  margin: 0 auto;
+}
+
+.mt0 {
+  margin-top: 0;
+}
+
+.mt3 {
+  margin-top: 3rem;
+}
+
+.ph1 {
+  padding: 0 1rem;
+}
+
+.ph2 {
+  padding: 0 2rem;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.small {
+  font-size: 0.8rem;
+}
+
+.spacer {
+  height: 2rem;
+}
