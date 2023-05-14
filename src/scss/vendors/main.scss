@@ -45,7 +45,6 @@ h6 {
 }
 
 a {
-  transition: color linear 0.2s;
   color: $grey;
 }
 
@@ -116,12 +115,13 @@ button {
 .button {
   align-self: center;
   margin-top: 1rem;
-  padding: 0.4rem 0.5rem;
+  padding: 1rem;
   border: 0;
   background-color: $accent;
   cursor: pointer;
   color: #fff;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .button:disabled {
@@ -225,3 +225,14 @@ button {
 .spacer {
   height: 2rem;
 }
+
+@media screen and (min-width: 576px) {
+   #page {
+      width: 70vw;
+      margin: 0 auto;
+   }
+
+   footer {
+      text-align: center;
+   }
+ }
