@@ -1,6 +1,6 @@
 {
    "title": "Reimagining Sziget Tickets Page",
-   "description": "a small project meant to redesign part of the Sziget festival ticket purchase flow with a focus on accessibility by <a href=\"https://github.com/lidiaCirrone/reimagining-sziget\" target=\"_blank\">@lidiaCirrone</a>",
+   "description": "A small project developed using Twig, Sass and Gulp after examining and running a Lighthouse audit on the official Sziget festival website",
    "ticketTypes": [
       {
          "label": "Multi-Day Passes",
