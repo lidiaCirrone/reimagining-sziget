@@ -78,18 +78,33 @@ button {
     font-size: 1.3rem;
   }
 
-  form {
+  form,
+  form > * {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
 
-    input {
-      margin-bottom: 1rem;
+    input[type="submit"] {
+      margin-top: 2rem;
+    }
+
+    .invalid input:invalid {
+      border: 2px solid #ffa3a3;
+    }
+
+    .invalid:has(input:invalid):after {
+      content: "Required field";
+      font-size: 14px;
+      color: red;
+    }
+    .invalid:has(input[type=date]:invalid):after {
+      content: "Invalid date";
     }
   }
 }
 
-#cart-modal[open] {
+#cart-modal[open],
+#cart-modal[open] #cart-content:not(.success) {
   display: flex;
   flex-direction: column;
 }
@@ -106,7 +121,12 @@ button {
   letter-spacing: 0.5px;
 }
 
-.button:hover {
+.button:disabled {
+  background-color: grey;
+  cursor: default;
+}
+
+.button:not(:disabled):hover {
   background-color: black;
 }
 
@@ -192,7 +212,7 @@ button {
 }
 
 .small {
-  font-size: 0.8rem;
+  font-size: 14px;
 }
 
 .spacer {
