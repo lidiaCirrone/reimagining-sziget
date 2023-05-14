@@ -1,7 +1,7 @@
 {
   "name": "reimagining-sziget",
   "version": "1.0.0",
-  "description": "a small project meant to redesign part of the Sziget festival ticket purchase flow with a focus on accessibility",
+  "description": "A small project developed using Twig, Sass and Gulp after examining and running a Lighthouse audit on the official Sziget festival website for accessibility and usability testing",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +19,7 @@
   ],
   "author": "Lidia Cirrone",
   "license": "ISC",
-  "homepage": "https://www.polyglotwannabe.com/",
+  "homepage": "https://github.com/lidiaCirrone/",
   "dependencies": {
     "browser-sync": "^2.29.1",
     "del": "^6.1.1",

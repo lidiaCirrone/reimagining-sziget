@@ -1,6 +1,6 @@
 {
    "title": "Reimagining Sziget Tickets Page",
-   "description": "A small project developed using Twig, Sass and Gulp after examining and running a Lighthouse audit on the official Sziget festival website",
+   "description": "A small project developed using Twig, Sass and Gulp after examining and running a Lighthouse audit on the official Sziget festival website for accessibility and usability testing",
    "ticketTypes": [
       {
          "label": "Multi-Day Passes",

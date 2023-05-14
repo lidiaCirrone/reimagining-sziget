@@ -61,17 +61,6 @@ button {
   font-size: $font-size-small;
 }
 
-.bar {
-  background-color: $accent;
-  display: flex;
-  justify-content: end;
-  padding: 1rem;
-
-  i {
-    color: white;
-  }
-}
-
 #cart-modal {
   min-width: 60%;
 
@@ -124,6 +113,7 @@ button {
 }
 
 .button:not(:disabled):hover {
+  color: #fff;
   background-color: black;
 }
 
@@ -203,10 +193,6 @@ button {
   margin-top: 3rem;
 }
 
-.mw50 {
-  max-width: 50%;
-}
-
 .ph1 {
   padding: 0 1rem;
 }
@@ -225,6 +211,12 @@ button {
 
 .spacer {
   height: 2rem;
+}
+
+@media screen and (min-width: 375px) {
+  .adaptable {
+    max-width: 40%;
+  }
 }
 
 @media screen and (min-width: 576px) {

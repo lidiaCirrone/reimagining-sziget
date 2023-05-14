@@ -1,10 +1,8 @@
 const { src, dest, parallel, series, watch } = require('gulp');
-// const pug = require('gulp-pug'); // Pug default view template
 const twig = require('gulp-twig');
 const sass = require('gulp-sass')(require('sass'));
 const prefix = require('gulp-autoprefixer');
 const data = require('gulp-data');
-//const minifyCSS = require('gulp-csso');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const plumber = require('gulp-plumber');
@@ -40,14 +38,11 @@ function css() {
          outputStyle: 'compressed'
       }).on('error', function (err) {
          console.log(err.message);
-         // sass.logError
          this.emit('end');
       }))
       .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7', 'iOS >= 9', 'Safari >= 9', 'Android >= 4.4', 'Opera >= 30'], {
          cascade: true
       }))
-      //.pipe(minifyCSS())
-      //  .pipe(concat('bootstrap.min.css'))
       .pipe(sourcemaps.write('.'))
       .pipe(dest('public/assets/css'));
 }
@@ -118,8 +113,6 @@ function browserSync() {
          baseDir: paths.build
       },
       notify: false,
-      //   browser: "google chrome",
-      // proxy: "0.0.0.0:5000"
    });
 }
 
