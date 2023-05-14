@@ -1,4 +1,6 @@
 $font-regular: "Evolventa", sans-serif;
+$font-size-default: 16px !default;
+$font-size-small: 14px !default;
 
 $accent: #005b8a;
 $grey: #545454;
@@ -61,6 +63,11 @@ button {
   color: $accent;
 }
 
+.close {
+   user-select: none;
+   font-size: $font-size-small;
+}
+
 .bar {
   background-color: $accent;
   display: flex;
@@ -74,10 +81,6 @@ button {
 
 #cart-modal {
   min-width: 50vw;
-
-  .close {
-    font-size: 1.3rem;
-  }
 
   form,
   form > * {
@@ -95,7 +98,7 @@ button {
 
     .invalid:has(input:invalid):after {
       content: "Required field";
-      font-size: 14px;
+      font-size: $font-size-small;
       color: red;
     }
     .invalid:has(input[type="date"]:invalid):after {
@@ -155,6 +158,10 @@ button {
     flex-direction: column;
     flex: 1;
   }
+
+  .add-to-cart {
+   margin-right: 1rem;
+  }
 }
 
 // utils
@@ -212,7 +219,7 @@ button {
 }
 
 .small {
-  font-size: 14px;
+  font-size: $font-size-small;
 }
 
 .spacer {
