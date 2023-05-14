@@ -26,8 +26,7 @@ function closeModal() {
 }
 
 function addToCartClicked(event) {
-   let button = event.target;
-   let cartItem = button.parentElement;
+   let cartItem = event.target;
    let ticketType = cartItem.dataset.ticket;
    let price = cartItem.dataset.price;
    validity = cartItem.dataset.validity;
